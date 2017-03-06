@@ -16,7 +16,8 @@ export default class Lexer extends Input{
         if (r !== false) return r;
         if (this.isDigit()) return this.getNumber();
         if (this.isAlpha()) return this.getString();
-        this.throw("Unsupported symbol")
+        if (this.eof()) return new Token(TYPES.EOF, undefined);
+        this.throw("Unsupported symbol" + this.peek().charCode)
 
     }
     matchSymbol(){
