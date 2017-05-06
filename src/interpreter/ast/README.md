@@ -21,6 +21,8 @@
 
 #### Assignment
 
+via binary operator
+
 * left node - variable name
 * right node - value
 

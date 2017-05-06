@@ -28,7 +28,8 @@ export default class Lexer extends Input{
         if (this.peek() == ',') return new Token(TYPES.COMMA, this.next())
         if (this.peek() == '(') return new Token(TYPES.LPAR, this.next())
         if (this.peek() == ')') return new Token(TYPES.RPAR, this.next())
-        if (this.peek() == ';') return new Token(TYPES.SEMICOLON, this.next())
+        if (this.peek() == '.') return new Token(TYPES.DOT, this.next())
+        if (this.peek() == '=') return new Token(TYPES.ASSIGMENT, this.next())
         return false;
     }
     isWhitespace() {
@@ -60,6 +61,11 @@ export default class Lexer extends Input{
         if (s == 'end') return new Token(TYPES.END, s)
         if (s == 'do') return new Token(TYPES.DO, s)
         if (s == 'while') return new Token(TYPES.WHILE, s)
+        if (s == 'and') return new Token(TYPES.AND, s)
+        if (s == 'or') return new Token(TYPES.OR, s)
+        if (s == 'true') return new Token(TYPES.TRUE, s)
+        if (s == 'false') return new Token(TYPES.FALSE, s)
+        if (s == 'not') return new Token(TYPES.NOT, s)
         if (s == 'times') return new Token(TYPES.TIMES, s)
         if (s == 'function') return new Token(TYPES.FUNCTION, s)
         return new Token(TYPES.NAME, s)

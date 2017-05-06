@@ -2,8 +2,8 @@
  * Created by mi on 6.3.17.
  */
 
-export default class Number {
+export default class BooleanNode {
   constructor(val) {
-    this.value = val;
+    this.type = val;
   }
 }

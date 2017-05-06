@@ -8,6 +8,6 @@ export default class Token {
         this.value = value
     }
     toString() {
-        return `Token:${this.type} - ${this.value}`
+        return `Token:${this.type.toString(1)} - ${this.value}`
     }
 }

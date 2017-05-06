@@ -16,17 +16,18 @@ test( 'Lexer - test super class', function ( test ) {
 
 test( 'Lexer - getToken', function ( test ) {
 
-    const lex = new Lexer("if ahoj else while , +\nend ; * /( ) do -5 times %")
+    const lex = new Lexer("if ahoj = else while , +\nend . * /( ) do -5 times %")
     test.equal(lex.getToken().type, Types.IF)
     const t = lex.getToken()
     test.equal(t.type, Types.NAME)
     test.equal(t.value, 'ahoj')
+    test.equal(lex.getToken().type, Types.ASSIGMENT)
     test.equal(lex.getToken().type, Types.ELSE)
     test.equal(lex.getToken().type, Types.WHILE)
     test.equal(lex.getToken().type, Types.COMMA)
     test.equal(lex.getToken().type, Types.PLUS)
     test.equal(lex.getToken().type, Types.END)
-    test.equal(lex.getToken().type, Types.SEMICOLON)
+    test.equal(lex.getToken().type, Types.DOT)
     test.equal(lex.getToken().type, Types.MULTIPLICATION)
     test.equal(lex.getToken().type, Types.DIVISION)
     test.equal(lex.getToken().type, Types.LPAR)

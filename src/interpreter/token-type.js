@@ -4,5 +4,5 @@
 
 import Enum from 'es6-enum'
 
-export default Enum("MULTIPLICATION", "MINUS", "PLUS", "NUMBER", "DIVISION", "COMMA", "SEMICOLON", "LPAR", "RPAR",
-    "NAME","END", "IF","WHILE", "ELSE","FUNCTION","TIMES", "DO", "EOF")
+export default Enum("MULTIPLICATION", "MINUS", "PLUS", "NUMBER", "DIVISION", "COMMA", "DOT", "AND", "OR", "TRUE", "FALSE", "NOT", "LPAR", "RPAR",
+    "NAME","END", "IF","WHILE", "ELSE","FUNCTION","TIMES", "DO", "EOF", "ASSIGMENT", "COMP")
