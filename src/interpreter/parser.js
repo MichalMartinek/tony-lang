@@ -98,7 +98,7 @@ export default class Parser {
       // Assigment
       if (this.matchType(Types.ASSIGMENT)) {
         this.eatToken();
-        const value = this.expression();
+        const value = this.condition();
         this.eatType(Types.DOT);
         return new BinaryOperator(second, first, value);
       }
@@ -190,7 +190,7 @@ export default class Parser {
     if (this.matchType(Types.NOT)) {
       const op = this.token;
       this.eatToken();
-      return new UnaryOperator(op, this.factor());
+      return new UnaryOperator(op, this.bolean());
     }
     else if (this.matchType(Types.LPAR)) {
       this.eatToken();
