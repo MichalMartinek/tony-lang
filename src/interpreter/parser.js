@@ -5,6 +5,8 @@
 import BinaryOperator from './ast/binary-operator';
 import UnaryOperator from './ast/unary-operator';
 import FunctionCall from './ast/function-call';
+import FunctionDef from './ast/function-def';
+import FunctionReturn from './ast/function-return';
 import ControlStrucutre from './ast/control-strucutre';
 import NumberNode from './ast/number-node';
 import BooleanNode from './ast/boolean-node';
@@ -103,7 +105,18 @@ export default class Parser {
         return new BinaryOperator(second, first, value);
       }
       // Function call
-      return this.functionCall(first);
+      const result =  this.functionCall(first);
+      this.eatType(Types.DOT);
+      return result;
+    }
+    else if (this.matchType(Types.FUNCTION)) {
+      return this.functionDef();
+    }
+    else if (this.matchType(Types.RETURN)) {
+      this.eatType(Types.RETURN);
+      const value =  new FunctionReturn(this.condition());
+      this.eatType(Types.DOT);
+      return value;
     }
     // Control Structure
     return this.controlStructure();
@@ -116,8 +129,26 @@ export default class Parser {
       if (this.matchType(Types.RPAR)) {
         this.eatToken();
         const result = new FunctionCall(name, args);
-        this.eatType(Types.DOT);
         return result;
+      }
+      else
+        this.eatType(Types.COMMA);
+    }
+  }
+  functionDef() {
+    this.eatType(Types.FUNCTION);
+    const name = this.token;
+    this.eatType(Types.NAME);
+    this.eatType(Types.LPAR);
+    const args = [];
+    while (true) {
+      if (!this.matchType(Types.RPAR)) {
+        args.push(this.token);
+        this.eatType(Types.NAME);
+      }
+      if (this.matchType(Types.RPAR)) {
+        this.eatToken();
+        return new FunctionDef(name, args, this.compoundStatement());
       }
       else
         this.eatType(Types.COMMA);

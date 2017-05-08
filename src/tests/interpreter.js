@@ -22,7 +22,12 @@ test('Interpreter', function ( test ) {
     end.
   `;
   const program = `
-    data = 0.
+  data = 0.
+    function print(name)
+      data = name.
+      return 5 + 3.
+    end.
+    data = print(3).
     cont = true.
     do 5 + 3 times
       data = data + 1.

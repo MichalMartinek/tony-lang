@@ -80,6 +80,13 @@ export default class Interpreter {
       }
       else return value.content;
     }
+    else if (node.constructor.name == 'FunctionCall') {
+      const value = this.functionCall(node, env);
+      if (Object.keys(value).length == 0) {
+        throw new Error("Function doesnt return value " + node.funcName.value);
+      }
+      else return value.content;
+    }
     else {
       throw new Error("Unknow operation");
     }
@@ -123,7 +130,7 @@ export default class Interpreter {
       }
       else if (statement.type.type == Types.DO) {
         const cond = this.getValue(statement.condition, scope)
-        for (let i = 0; i < cond; ++i) {
+        for (let j = 0; j < cond; ++j) {
           for (let i = 0; i < statement.block.length; ++i) {
             this.evaluate(statement.block[i], scope);
           }
@@ -133,6 +140,33 @@ export default class Interpreter {
         throw new Error("Wrong statement");
       }
     }
+    else if (statement.constructor.name == 'FunctionDef') {
+      env.set(statement.funcName.value, 'func', statement);
+    }
+    else if (statement.constructor.name == 'FunctionReturn') {
+      env.set('_return', 'return', this.getValue(statement.value, env));
+      return true;
+    }
+    else if (statement.constructor.name == 'FunctionCall') {
+      this.functionCall(statement, env);
+    }
+    return false;
+  }
+  functionCall(statement, env) {
+    const func = env.get(statement.funcName.value);
+    if (Object.keys(func).length == 0 || func.type != 'func') {
+      throw new Error("Unknow function " + node.name.value);
+    }
+    const scope = new Enviroment(env);
+    for (let i = 0; i < statement.args.length; ++i) {
+      scope.fset(func.content.args[i].value, 'num', this.getValue(statement.args[i]));
+    }
+    for (let i = 0; i < func.content.block.length; ++i) {
+      if (this.evaluate(func.content.block[i], scope)) {
+        return scope.get('_return');
+      }
+    }
+    return false;
   }
   run() {
     const statements = this.parser.parse();

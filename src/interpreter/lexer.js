@@ -68,6 +68,7 @@ export default class Lexer extends Input{
         if (s == 'not') return new Token(TYPES.NOT, s)
         if (s == 'times') return new Token(TYPES.TIMES, s)
         if (s == 'function') return new Token(TYPES.FUNCTION, s)
+        if (s == 'return') return new Token(TYPES.RETURN, s)
         return new Token(TYPES.NAME, s)
 
     }

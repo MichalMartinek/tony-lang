@@ -40,3 +40,11 @@ test('Parser 3', function ( test ) {
   //console.log(util.inspect(res, false, null));
   test.end()
 })
+test('Parser 3', function ( test ) {
+  
+  const lex = new Lexer("function print(write, test) return 3. end. ");
+  const par = new Parser(lex);
+  const res = par.parse();
+  console.log(util.inspect(res, false, null));
+  test.end()
+})

@@ -13,39 +13,35 @@ export default class Enviroment {
   
   set(name, type, content) {
     if (!this.modify(name,type, content)) {
-      this.vars.push({name: name, type: type, content: content});
+      this.fset(name, type, content);
     }
   }
-  
+  fset (name,type,content) {
+    this.vars.push({name: name, type: type, content: content});
+  }
   modify(name, type, content) {
-    if (this.parent == null || !this.parent.modify(name, type, content)) {
-      const result = this.vars.find(function (obj) {
-        return obj.name == name;
-      });
-      if (result !== undefined) {
-        result.type = type;
-        result.content = content;
-        return true;
-      }
-      return false;
+    const result = this.vars.find(function (obj) {
+      return obj.name == name;
+    });
+    if (result !== undefined) {
+      result.type = type;
+      result.content = content;
+      return true;
     }
-    return true;
+    else if (this.parent != null) {
+       return this.parent.modify(name, type, content)
+    }
+    return false;
   }
   get (name) {
-    const res = this.parent !== null ? this.parent.get(name) : {};
-    if (Object.keys(res).length == 0) {
-      const result = this.vars.find(function (obj) {
-        return obj.name == name;
-      });
-      if (result !== undefined) {
-        return result;
-      }
-      else {
-        return {};
-      }
+    const result = this.vars.find(function (obj) {
+      return obj.name == name;
+    });
+    if (result !== undefined) {
+      return result;
     }
     else {
-      return res;
+      return this.parent !== null ? this.parent.get(name) : {};
     }
   }
   
