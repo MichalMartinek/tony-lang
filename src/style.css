@@ -1,0 +1,22 @@
+.board-row {
+
+}
+
+.board-square {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    border: 1px black solid;
+    margin: 2px;
+    padding: 0;
+}
+
+.dir-left {
+    transform: rotate(180deg);
+}
+.dir-up {
+    transform: rotate(-90deg);
+}
+.dir-down {
+    transform: rotate(90deg);
+}
