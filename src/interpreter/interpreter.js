@@ -13,26 +13,12 @@ export default class Interpreter {
    *
    * @param parser Parser
    */
-  constructor(parser, dispatch) {
+  constructor(parser, dispatch, level) {
     this.parser = parser;
     this.env = new Enviroment(null);
     this.dispatch = dispatch
-    this.data = [];
-    const length = 5;
-    
-    for(let i = 0; i < length; i++) {
-      const arr = []
-      for(let i = 0; i < length; i++) {
-        arr.push(0);
-      }
-      this.data.push(arr);
-    }
-    this.data[0][0] = 2;
-    this.data[3][3] = 1;
-    this.position =  {
-      x: 0,
-      y: 0,
-    };
+    this.data = level.board
+    this.position = level.position
     this.direction = 1;
   }
   handleLimits(x) {

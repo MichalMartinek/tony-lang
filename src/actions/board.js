@@ -11,6 +11,15 @@ export const changeCode = (code) => {
     })
   }
 }
+export const initBoard = (board,position) => {
+  return dispatch => {
+    dispatch({
+      type: t.MOVE,
+      board: board,
+      position: position
+    })
+  }
+}
 
 function decor(dispatch) {
   const front = []
@@ -35,12 +44,12 @@ function decor(dispatch) {
   }
 }
 
-export const compile = (code) => {
+export const compile = (code, level) => {
   return dispatch => {
     try {
       const lex = new Lexer(code);
       const par = new Parser(lex);
-      const intr = new Interpreter(par, decor(dispatch))
+      const intr = new Interpreter(par, decor(dispatch), level)
       intr.run();
     }
     catch(error) {

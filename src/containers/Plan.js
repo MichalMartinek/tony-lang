@@ -7,6 +7,16 @@ import Editor from '../components/Editor'
 import * as actions from '../actions/board'
 
 class Plan extends Component {
+  constructor() {
+    super()
+    this.initBoard = this.initBoard.bind(this)
+  }
+  componentDidMount() {
+    this.initBoard()
+  }
+  initBoard() {
+    this.props.initBoard(JSON.parse(JSON.stringify(this.props.level.board)), JSON.parse(JSON.stringify(this.props.level.position)))
+  }
   render() {
     return (
       <div className="wrapper">
@@ -24,7 +34,8 @@ class Plan extends Component {
         </div>
         <div className="half">
           <Board direction={this.props.direction} board={this.props.board} />
-          <button className="run" onClick={() => this.props.compile(this.props.value)}>Run 	▶</button>
+          <button className="run" onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>Run 	▶</button>
+          <button className="run warn" onClick={this.initBoard}>Reset</button>
         </div>
       </div>
     );
@@ -36,7 +47,8 @@ const mapStateToProps = state => ({
   direction: state.board.direction,
   value: state.board.code,
   error: state.board.error,
-  isError: state.board.isError
+  isError: state.board.isError,
+  level: state.level,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
