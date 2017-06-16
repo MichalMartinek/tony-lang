@@ -23,6 +23,20 @@ export default class Interpreter {
   constructor(parser) {
     this.parser = parser;
     this.env = new Enviroment(null);
+    this.data = [];
+    const length = 5;
+    const arr = []
+    for(let i = 0; i < length; i++) {
+      arr.push(0);
+    }
+    for(let i = 0; i < length; i++) {
+      this.data.push(arr);
+    }
+    this.data[0][0] = 1;
+    this.direction = [1,0];
+  }
+  move() {
+    this.data[this.direction[0]][this.direction[1]] = 1;
   }
   getValue(node, env) {
     if (node.constructor.name == 'BinaryOperator') {
@@ -153,6 +167,10 @@ export default class Interpreter {
     return false;
   }
   functionCall(statement, env) {
+    if (statement.funcName.value == 'move') {
+      this.move();
+      return {};
+    }
     const func = env.get(statement.funcName.value);
     if (Object.keys(func).length == 0 || func.type != 'func') {
       throw new Error("Unknow function " + node.name.value);
@@ -166,7 +184,7 @@ export default class Interpreter {
         return scope.get('_return');
       }
     }
-    return false;
+    return {};
   }
   run() {
     const statements = this.parser.parse();

@@ -27,6 +27,7 @@ test('Interpreter', function ( test ) {
       data = name.
       return 5 + 3.
     end.
+    move().
     data = print(3).
     cont = true.
     do 5 + 3 times
