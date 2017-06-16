@@ -16,9 +16,9 @@ class Square extends React.Component {
     const symbol = this.getSymbol(this.props.symbol)
     let classNames = 'board-square'
     if (this.props.symbol === t.SQR_CAR) {
-      if (this.props.orientation == t.DIRECTION_LEFT) classNames += ' dir-left'
-      if (this.props.orientation == t.DIRECTION_UP) classNames += ' dir-up'
-      if (this.props.orientation == t.DIRECTION_DOWN) classNames += ' dir-down'
+      if (this.props.orientation === t.DIRECTION_LEFT) classNames += ' dir-left'
+      if (this.props.orientation === t.DIRECTION_UP) classNames += ' dir-up'
+      if (this.props.orientation === t.DIRECTION_DOWN) classNames += ' dir-down'
     }
     return (
       <div className={classNames}>
