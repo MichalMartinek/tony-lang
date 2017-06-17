@@ -16,6 +16,10 @@ class StatusBar extends Component {
         return (
           <div className="statusbar statusbar-red">UNSUCCESFULLY COMPLETED</div>
         )
+      case t.ERROR:
+        return (
+          <div className="statusbar statusbar-red">ERROR <button onClick={this.props.viewError}>view</button></div>
+        )
     }
     return (
       <div className="statusbar">STOPPED</div>

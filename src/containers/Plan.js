@@ -52,7 +52,7 @@ class Plan extends Component {
             </button>
           </div>
   
-          <StatusBar completed={this.props.completed} />
+          <StatusBar completed={this.props.completed} viewError={this.props.closeError}/>
         </div>
       );
     }

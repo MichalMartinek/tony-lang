@@ -40,12 +40,13 @@ export default (state = initialState, action) => {
         ...state,
         isError: true,
         error: action.error,
-        completed: t.FAIL
+        completed: t.ERROR
       }
     case t.CLOSE_ERROR:
+      const isE = !state.isError
       return {
         ...state,
-        isError: false,
+        isError: isE,
       }
     case t.RUNNING:
       return {
