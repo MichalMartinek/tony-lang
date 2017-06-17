@@ -5,6 +5,7 @@ import Modal from 'react-modal'
 import Board from '../components/Board'
 import Editor from '../components/Editor'
 import * as actions from '../actions/board'
+import * as t from '../constants/board'
 
 class Plan extends Component {
   constructor() {
@@ -31,11 +32,13 @@ class Plan extends Component {
         </Modal>
         <div className="half">
           <Editor handleChange={this.props.changeCode} value={this.props.value}/>
+          <div>{this.props.completed}</div>
         </div>
         <div className="half">
           <Board direction={this.props.direction} board={this.props.board} />
           <button className="run" onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>Run 	▶</button>
           <button className="run warn" onClick={this.initBoard}>Reset</button>
+          <button className="run" hidden={this.props.completed !== t.WIN} onClick={this.initBoard}>Next Level</button>
         </div>
       </div>
     );
@@ -49,6 +52,7 @@ const mapStateToProps = state => ({
   error: state.board.error,
   isError: state.board.isError,
   level: state.level,
+  completed: state.board.completed,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)

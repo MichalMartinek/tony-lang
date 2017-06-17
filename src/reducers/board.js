@@ -1,7 +1,7 @@
 import * as t from '../constants/board'
 
 const initialState = {
-  board: [[2, 0, 0, 0,], [0, 0, 0, 0,], [0, 0, 1, 0,], [0, 0, 0, 0,]],
+  board: [[0]],
   direction: t.DIRECTION_RIGHT,
   position: {
     x: 0,
@@ -9,7 +9,8 @@ const initialState = {
   },
   code: '',
   error: '',
-  isError: false
+  isError: false,
+  completed: t.RUNNING
 }
 
 
@@ -43,6 +44,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isError: false,
+      }
+    case t.RUNNING:
+      return {
+        ...state,
+        completed: t.RUNNING
+      }
+    case t.WIN:
+      return {
+        ...state,
+        completed: t.WIN
+      }
+    case t.FAIL:
+      return {
+        ...state,
+        completed: t.FAIL
       }
     default:
       return state

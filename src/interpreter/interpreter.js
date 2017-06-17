@@ -20,6 +20,13 @@ export default class Interpreter {
     this.data = level.board
     this.position = level.position
     this.direction = 1;
+    this.pizzas = 0;
+    for(let i = 0; i < this.data.length; ++i) {
+      for(let j = 0; j < this.data[i].length; ++j) {
+        if (this.data[i][j] === t.SQR_PIZZA)
+          this.pizzas +=1
+      }
+    }
   }
   handleLimits(x) {
     if (x >= t.SIZE) return t.SIZE -1
@@ -44,7 +51,10 @@ export default class Interpreter {
     this.data[this.position.y][this.position.x] = t.SQR_FREE
     this.position.x = this.handleLimits(this.position.x + dir.x)
     this.position.y = this.handleLimits(this.position.y + dir.y)
-    this.data[this.position.y][this.position.x] = t.SQR_CAR
+    if (this.data[this.position.y][this.position.x] === t.SQR_PIZZA)
+    if (this.data[this.position.y][this.position.x] = t.SQR_CAR) {
+      this.pizzas -= 1
+    }
     this.dispatch({type: t.MOVE, board: JSON.parse(JSON.stringify(this.data)), position: JSON.parse(JSON.stringify(this.position))})
   }
   turnRight() {
@@ -211,7 +221,10 @@ export default class Interpreter {
     for (let i = 0; i < statements.length; ++i) {
       this.evaluate(statements[i], this.env);
     }
-    this.dispatch({type: t.STOP})
+    if (this.pizzas === 0)
+      this.dispatch({type: t.WIN})
+    else
+      this.dispatch({type: t.FAIL})
     return statements;
   }
 }
