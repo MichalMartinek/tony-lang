@@ -15,6 +15,7 @@ export const CHANGE_CODE = 'board/CHANGE_CODE'
 export const RUNNING = 'board/RUNNING'
 export const FAIL = 'board/FAIL'
 export const WIN = 'board/WIN'
+export const STOPPED = 'board/STOPPED'
 
 export const ERROR = 'board/ERROR'
 export const CLOSE_ERROR = 'board/CLOSEERROR'

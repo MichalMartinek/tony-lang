@@ -20,6 +20,9 @@ export const initBoard = (board,position) => {
       board: board,
       position: position
     })
+    dispatch({
+      type: t.STOPPED,
+    })
   }
 }
 export const nextLevel = (level) => {
@@ -32,6 +35,9 @@ export const nextLevel = (level) => {
     else {
       const l = levels.LEVELS[level.index + 1]
       dispatch({type: tLevel.NEW_LEVEL, level: l})
+      dispatch({
+        type: t.STOPPED,
+      })
       dispatch({
         type: t.MOVE,
         board: l.board,
