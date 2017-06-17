@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import Board from '../components/Board'
 import Editor from '../components/Editor'
+import End from '../components/End'
+import StatusBar from '../components/StatusBar'
 import * as actions from '../actions/board'
 import * as t from '../constants/board'
 
@@ -20,11 +22,7 @@ class Plan extends Component {
   }
   render() {
     if (this.props.win) {
-      return (
-        <div className="container">
-          <h1>Congratulations! You completed TonyLang.</h1>
-      </div>
-    );
+      return ( <End />);
     }
     else {
       return (
@@ -40,7 +38,6 @@ class Plan extends Component {
           </Modal>
           <div className="half">
             <Editor handleChange={this.props.changeCode} value={this.props.value}/>
-            <div>{this.props.completed}</div>
           </div>
           <div className="half">
             <Board direction={this.props.direction} board={this.props.board}/>
@@ -54,6 +51,8 @@ class Plan extends Component {
                     onClick={() => this.props.nextLevel(this.props.level)}>Next Level
             </button>
           </div>
+  
+          <StatusBar completed={this.props.completed} />
         </div>
       );
     }
