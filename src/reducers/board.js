@@ -39,7 +39,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isError: true,
-        error: action.error
+        error: action.error,
+        completed: t.FAIL
       }
     case t.CLOSE_ERROR:
       return {
