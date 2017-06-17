@@ -38,7 +38,7 @@ class Plan extends Component {
           <Board direction={this.props.direction} board={this.props.board} />
           <button className="run" onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>Run 	▶</button>
           <button className="run warn" onClick={this.initBoard}>Reset</button>
-          <button className="run" hidden={this.props.completed !== t.WIN} onClick={this.initBoard}>Next Level</button>
+          <button className="run" hidden={this.props.completed !== t.WIN} onClick={() => this.props.nextLevel(this.props.level)}>Next Level</button>
         </div>
       </div>
     );

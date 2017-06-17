@@ -2,6 +2,8 @@ import * as t from '../constants/board'
 import Lexer from '../interpreter/lexer'
 import Parser from '../interpreter/parser'
 import Interpreter from '../interpreter/interpreter'
+import * as tLevel from '../constants/level'
+import * as levels from '../lib/levels'
 
 export const changeCode = (code) => {
   return dispatch => {
@@ -17,6 +19,17 @@ export const initBoard = (board,position) => {
       type: t.MOVE,
       board: board,
       position: position
+    })
+  }
+}
+export const nextLevel = (level) => {
+  return dispatch => {
+    const l = levels.LEVELS[level.index + 1]
+    dispatch({type: tLevel.NEW_LEVEL, level: l})
+    dispatch({
+      type: t.MOVE,
+      board: l.board,
+      position: l.position
     })
   }
 }

@@ -18,4 +18,4 @@ export const WIN = 'board/WIN'
 
 export const ERROR = 'board/ERROR'
 export const CLOSE_ERROR = 'board/CLOSEERROR'
-
+export const GAME_WIN = 'board/GAME_WIN'

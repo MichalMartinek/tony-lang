@@ -10,7 +10,8 @@ const initialState = {
   code: '',
   error: '',
   isError: false,
-  completed: t.RUNNING
+  completed: t.RUNNING,
+  win: false
 }
 
 
@@ -59,6 +60,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         completed: t.FAIL
+      }
+    case t.GAME_WIN:
+      return {
+        ...state,
+        win: true
       }
     default:
       return state
