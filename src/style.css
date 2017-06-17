@@ -5,17 +5,36 @@
 .board {
     width: 33%;
 }
-
+.board-row {
+    display: flex;
+}
 .board-square {
-    width: 2rem;
-    height: 2rem;
+    background-color: lightyellow;
+    flex: 1 0 auto;
     display: inline-block;
-    border: 1px black solid;
+    border: 2px saddlebrown solid;
     margin: 2px;
     padding: 0;
     text-align: center;
+    border-radius: 5%;
 }
-
+.board-square:before {
+    content:'';
+    float:left;
+    padding-top:100%;
+}
+.board-square-car {
+    background-image: url("./assets/car2.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.board-square-pizza {
+    background-image: url("./assets/pizza.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .dir-left {
     transform: rotate(180deg);
 }
