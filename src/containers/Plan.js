@@ -45,10 +45,11 @@ class Plan extends Component {
           <div className="half">
             <Board direction={this.props.direction} board={this.props.board}/>
             <button className="run"
-                    onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>
+                    onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}
+                    disabled={this.props.completed === t.RUNNING}>
               Run ▶
             </button>
-            <button className="run warn" onClick={this.initBoard}>Reset</button>
+            <button className="run warn" onClick={this.initBoard} disabled={this.props.completed === t.RUNNING}>Reset</button>
             <button className="run" hidden={this.props.completed !== t.WIN}
                     onClick={() => this.props.nextLevel(this.props.level)}>Next Level
             </button>
