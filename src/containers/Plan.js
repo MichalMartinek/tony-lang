@@ -19,29 +19,43 @@ class Plan extends Component {
     this.props.initBoard(JSON.parse(JSON.stringify(this.props.level.board)), JSON.parse(JSON.stringify(this.props.level.position)))
   }
   render() {
-    return (
-      <div className="wrapper">
-        <Modal
-          isOpen={this.props.isError}
-          contentLabel="Error"
-          onRequestClose={this.props.closeError}
-        >
-          <h1 className="error-heading">Error</h1>
-          <code>{this.props.error.name + ' - ' + this.props.error.message}</code><br />
-          <button className="run warn" onClick={this.props.closeError}>Close</button>
-        </Modal>
-        <div className="half">
-          <Editor handleChange={this.props.changeCode} value={this.props.value}/>
-          <div>{this.props.completed}</div>
-        </div>
-        <div className="half">
-          <Board direction={this.props.direction} board={this.props.board} />
-          <button className="run" onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>Run 	▶</button>
-          <button className="run warn" onClick={this.initBoard}>Reset</button>
-          <button className="run" hidden={this.props.completed !== t.WIN} onClick={() => this.props.nextLevel(this.props.level)}>Next Level</button>
-        </div>
+    if (this.props.win) {
+      return (
+        <div className="container">
+          <h1>Congratulations! You completed TonyLang.</h1>
       </div>
     );
+    }
+    else {
+      return (
+        <div className="wrapper">
+          <Modal
+            isOpen={this.props.isError}
+            contentLabel="Error"
+            onRequestClose={this.props.closeError}
+          >
+            <h1 className="error-heading">Error</h1>
+            <code>{this.props.error.name + ' - ' + this.props.error.message}</code><br />
+            <button className="run warn" onClick={this.props.closeError}>Close</button>
+          </Modal>
+          <div className="half">
+            <Editor handleChange={this.props.changeCode} value={this.props.value}/>
+            <div>{this.props.completed}</div>
+          </div>
+          <div className="half">
+            <Board direction={this.props.direction} board={this.props.board}/>
+            <button className="run"
+                    onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}>
+              Run ▶
+            </button>
+            <button className="run warn" onClick={this.initBoard}>Reset</button>
+            <button className="run" hidden={this.props.completed !== t.WIN}
+                    onClick={() => this.props.nextLevel(this.props.level)}>Next Level
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
@@ -53,6 +67,7 @@ const mapStateToProps = state => ({
   isError: state.board.isError,
   level: state.level,
   completed: state.board.completed,
+  win: state.board.win,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)

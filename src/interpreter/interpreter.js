@@ -51,10 +51,10 @@ export default class Interpreter {
     this.data[this.position.y][this.position.x] = t.SQR_FREE
     this.position.x = this.handleLimits(this.position.x + dir.x)
     this.position.y = this.handleLimits(this.position.y + dir.y)
-    if (this.data[this.position.y][this.position.x] === t.SQR_PIZZA)
-    if (this.data[this.position.y][this.position.x] = t.SQR_CAR) {
+    if (this.data[this.position.y][this.position.x] === t.SQR_PIZZA) {
       this.pizzas -= 1
     }
+    this.data[this.position.y][this.position.x] = t.SQR_CAR
     this.dispatch({type: t.MOVE, board: JSON.parse(JSON.stringify(this.data)), position: JSON.parse(JSON.stringify(this.position))})
   }
   turnRight() {

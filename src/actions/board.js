@@ -24,13 +24,20 @@ export const initBoard = (board,position) => {
 }
 export const nextLevel = (level) => {
   return dispatch => {
-    const l = levels.LEVELS[level.index + 1]
-    dispatch({type: tLevel.NEW_LEVEL, level: l})
-    dispatch({
-      type: t.MOVE,
-      board: l.board,
-      position: l.position
-    })
+    if(level.index + 1 >= levels.LEVELS.length) {
+      dispatch({
+        type: t.GAME_WIN,
+      })
+    }
+    else {
+      const l = levels.LEVELS[level.index + 1]
+      dispatch({type: tLevel.NEW_LEVEL, level: l})
+      dispatch({
+        type: t.MOVE,
+        board: l.board,
+        position: l.position
+      })
+    }
   }
 }
 
