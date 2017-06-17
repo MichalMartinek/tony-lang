@@ -24,7 +24,7 @@
     padding-top:100%;
 }
 .board-square-car {
-    background-image: url("./assets/car2.jpg");
+    background-image: url("./assets/car.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
