@@ -21,9 +21,7 @@ class Editor extends React.Component {
       mode: 'simplemode',
     };
     return (
-      <div className="editor">
         <CodeMirror className="editor-code" value={this.props.value} onChange={this.handleChange} options={options} />
-      </div>
     );
   }
 }

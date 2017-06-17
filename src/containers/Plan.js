@@ -26,7 +26,7 @@ class Plan extends Component {
     }
     else {
       return (
-        <div className="wrapper">
+        <div>
           <Modal
             isOpen={this.props.isError}
             contentLabel="Error"
@@ -36,21 +36,41 @@ class Plan extends Component {
             <code>{this.props.error.name + ' - ' + this.props.error.message}</code><br />
             <button className="run warn" onClick={this.props.closeError}>Close</button>
           </Modal>
-          <div className="half">
-            <Editor handleChange={this.props.changeCode} value={this.props.value}/>
-          </div>
-          <div className="half">
+          <div className="wrapper">
+            <div className="description">
+              <h1>Wow</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illo ipsam praesentium tempora vitae. Aliquid dicta dolore earum eos, esse hic inventore, modi quae quaerat, quasi quo rerum sed tenetur?</p>
+            </div>
+            <div className="editor">
+              <Editor handleChange={this.props.changeCode} value={this.props.value}/>
+              <div className="controls">
+                <button className="run"
+                        onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}
+                        disabled={this.props.completed === t.RUNNING}>
+                  Run ▶
+                </button>
+                <button className="run warn" onClick={this.initBoard} disabled={this.props.completed === t.RUNNING}>Reset</button>
+                <button className="run" hidden={this.props.completed !== t.WIN}
+                        onClick={() => this.props.nextLevel(this.props.level)}>Next Level
+                </button>
+              </div>
+            </div>
             <Board direction={this.props.direction} board={this.props.board}/>
-            <button className="run"
-                    onClick={() => this.props.compile(this.props.value, JSON.parse(JSON.stringify(this.props.level)))}
-                    disabled={this.props.completed === t.RUNNING}>
-              Run ▶
-            </button>
-            <button className="run warn" onClick={this.initBoard} disabled={this.props.completed === t.RUNNING}>Reset</button>
-            <button className="run" hidden={this.props.completed !== t.WIN}
-                    onClick={() => this.props.nextLevel(this.props.level)}>Next Level
-            </button>
           </div>
+          
+          
   
           <StatusBar completed={this.props.completed} viewError={this.props.closeError}/>
         </div>

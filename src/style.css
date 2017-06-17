@@ -1,5 +1,9 @@
-.board-row {
+* {
+    box-sizing: border-box;
+}
 
+.board {
+    width: 33%;
 }
 
 .board-square {
@@ -28,14 +32,18 @@
 .half {
     width: 50%  ;
 }
-
-.editor textarea{
-
+.description {
+    width: 33%;
+    padding: 0.5rem 2rem;
+    overflow-y: scroll;
+    height: calc(100vh - 30px - 5rem);
 }
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Reenie Beanie', cursive;
+    min-height: 100vh;
 }
 h1 {
     font-size: 3rem;
@@ -98,19 +106,39 @@ p {
 .codebook .CodeMirror {
     height: auto;
 }
-
+.editor {
+    width: 33%;
+}
 .editor-code {
     border: 1px solid blanchedalmond;
+    height: auto;
+}
+.CodeMirror {
+    height: calc(100vh - 30px - 5rem - 60px);
 }
 
+.controls {
+    display: flex;
+    padding: 0 2rem;
+    justify-content: space-between;
+    height: 60px;
+    background: ghostwhite;
+}
+.controls button {;
+    width: 30%;
+    height: calc(100% - 3px);
+}
+button[hidden] {
+    visibility: hidden;
+}
 .run {
     outline: none;
     border: 3px solid darkolivegreen;
     color: darkolivegreen;
-    background: none;
-    padding: 1rem;
+    background: white;
     font-size: 1rem;
     transition: all 0.4s ease-out;
+    display: inline-block;
 }
 
 .run:hover {
@@ -155,4 +183,28 @@ button[disabled]{
 }
 .statusbar-red {
     background: crimson;
+}
+
+/*
+ *  STYLE 2
+ */
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-track, .description::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar, .description::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb, .description::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: crimson;
 }
