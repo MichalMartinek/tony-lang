@@ -25,6 +25,7 @@ export const initBoard = (board,position) => {
     })
   }
 }
+
 export const nextLevel = (level) => {
   return dispatch => {
     if(level.index + 1 >= levels.LEVELS.length) {
@@ -46,9 +47,8 @@ export const nextLevel = (level) => {
     }
   }
 }
-
+const front = []
 function decor(dispatch) {
-  const front = []
   let interval
   let running = false
   const fun = () => {
@@ -69,7 +69,14 @@ function decor(dispatch) {
     }
   }
 }
-
+export const stop = () => {
+    front.splice(0,front.length)
+    return dispatch => {
+        dispatch({
+            type: t.STOPPED,
+        })
+    }
+}
 export const compile = (code, level) => {
   return dispatch => {
     try {
