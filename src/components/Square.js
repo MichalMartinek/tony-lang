@@ -6,9 +6,9 @@ class Square extends React.Component {
   getSymbol(i) {
     switch (i) {
       case t.SQR_PIZZA:
-        return <img src={Pizza} />
+        return <img src={Pizza} alt="Pizza symbol"/>
       case t.SQR_CAR:
-        return <img src={Car}/>
+        return <img src={Car} alt="Car symbol"/>
       default:
         return null
     }

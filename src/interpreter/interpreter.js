@@ -1,10 +1,7 @@
 /**
  * Created by mi on 6.3.17.
  */
-
-
 import Types from './token-type'
-import Parser from './parser'
 import Enviroment from './enviroment'
 import * as t from '../constants/board'
 
@@ -105,7 +102,7 @@ export default class Interpreter {
       }
     }
     else if (node.constructor.name === 'NumberNode') {
-      return parseInt(node.value);
+      return parseInt(node.value, 10);
     }
     else if (node.constructor.name === 'BooleanNode') {
       if (node.type.type === Types.TRUE)
